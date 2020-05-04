@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/api/events', (req, res) => {
-    let machineId = req.body.MachineGUID;
-    let eventcollection = req.body.MenuClickedEvents;
+    let machineId = req.body.machineGuid;
+    let eventcollection = req.body.clickItems;
     if (machineId && eventcollection) {
         if (eventcollection.length == 0) {
             res.status(400);
