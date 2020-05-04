@@ -2,15 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/api/events', (req, res) => {
-    let id = req.body.EventId;
-    let createdAt = req.body.CreatedAt;
-    let name = req.body.Name;
-    if (id && createdAt && name) {
-        res.status(200);
-        return res.json({ message: "event is created", eventId: id });
+    let machineId = req.body.MachineGUID;
+    let eventcollection = req.body.MenuClickedEvents;
+    if (machineId && eventcollection) {
+        if (eventcollection.length == 0) {
+            res.status(400);
+            return res.json({ message: "bad request format" });
+        } else {
+            let successIds = [];
+            eventcollection.forEach(item => {
+                successIds.push(item.EventId);
+            });
+            res.status(201);
+            return res.json({ message: "The events are created", eventIds: successIds });
+        }
     } else {
         res.status(500);
-        return res.json({ message: "Invalid data is passed" });
+        return res.json({ message: "Unable to process it" });
     }
 });
 module.exports = router;
