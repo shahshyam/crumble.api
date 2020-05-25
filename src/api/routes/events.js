@@ -23,8 +23,8 @@ router.post('/api/events', (req, res) => {
     }
 });
 router.get('/api/updateribbon', (req, res) => {
-    let tagId = req.query.tagId    
-    if (tagId) {
+    let tabId = req.query.tabId    
+    if (tabId) {
         let doc = builder.create('customUI');
         doc.att('xmlns', 'http://schemas.microsoft.com/office/2009/07/customui')
             .ele('ribbon')
