@@ -22,6 +22,24 @@ router.post('/api/events', (req, res) => {
         return res.json({ message: "Unable to process it" });
     }
 });
+
+router.post('/api/processworkSheet', (req, res) => {
+    let controlTag = req.body.controlTag;
+    let worksheets = req.body.worksheets;
+    if (controlTag && worksheets) {
+        if (worksheets.length == 0) {
+            res.status(400);
+            return res.json({ message: "bad request format" });
+        } else {            
+            res.status(200);
+            return res.json({ controlTag, worksheets });
+        }
+    } else {
+        res.status(500);
+        return res.json({ message: "Unable to process it" });
+    }
+});
+
 router.get('/api/updateribbon', (req, res) => {
     let tabId = req.query.tabId    
     if (tabId) {
